@@ -13,21 +13,22 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var topText: UITextField!
     @IBOutlet weak var buttomText: UITextField!
+    @IBOutlet weak var actionButton: UIBarButtonItem!
+    @IBOutlet weak var navigationBar: UINavigationBar!
+    @IBOutlet weak var toolBar: UIToolbar!
     
     let memeTextAtribute: [NSAttributedString.Key: Any] = [
         NSAttributedString.Key.strokeColor: UIColor.black,
+        NSAttributedString.Key.foregroundColor : UIColor.black,
         NSAttributedString.Key.strokeWidth : 2.0,
-        NSAttributedString.Key.foregroundColor : UIColor.white,
         NSAttributedString.Key.font : UIFont(name: "HelveticaNeue-CondensedBlack", size: 28) as Any
     ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        topText.textAlignment = .center
-        buttomText.textAlignment = .center
         topText.defaultTextAttributes = memeTextAtribute
         buttomText.defaultTextAttributes = memeTextAtribute
+        imageView.sizeToFit()
     }
 
     @IBAction func pickImageFromAlbum(_ sender: Any){
@@ -44,14 +45,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
         present(imagePicker, animated: true, completion: nil)
     }
     
+    @IBAction func shareImage(_ sender: Any) {
+        let image = generateMemedImage()
+        let controller = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        present(controller, animated: true, completion: save)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
-        subscribeToKeyboardNotifications()
+        actionButton.isEnabled = imageView.image != nil
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super .viewWillDisappear(animated)
-        unsubscribeFromKeyboardNotifications()
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -60,49 +66,42 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
             imageView.sizeToFit()
         }
         dismiss(animated: true, completion: nil)
+        actionButton.isEnabled = imageView.image != nil
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         imageView.image = nil
         dismiss(animated: true, completion: nil)
-    }    
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        topText.text = " "
-        buttomText.text = " "
+        actionButton.isEnabled = imageView.image != nil
+
     }
-   
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
+    
+    struct Meme {
+        var topTextMeme : String
+        var buttomTextMeme : String
+        var originalImage : UIImage
+        var memedImage : UIImage
+    }
+    
+    func generateMemedImage() -> UIImage {
+        //Hide Toolbar and navbar
+        navigationBar.isHidden = true
+        toolBar.isHidden = true
+        // Render view to an image
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
+        let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+
+        //Show tollbar and navbar
+        navigationBar.isHidden = false
+        toolBar.isHidden = false
         
+        return memedImage
     }
     
-    func subscribeToKeyboardNotifications() {
-
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-    }
-
-    func unsubscribeFromKeyboardNotifications() {
-
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-    }
-    
-    @objc func keyboardWillShow(_ notification:Notification) {
-
-        view.frame.origin.y -= getKeyboardHeight(notification)
-    }
-    
-    func keyboardWillHide(_ notification:Notification ) {
-        
-        view.frame.origin.y -= 0
-    }
-
-    func getKeyboardHeight(_ notification:Notification) -> CGFloat {
-
-        let userInfo = notification.userInfo
-        let keyboardSize = userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue // of CGRect
-        return keyboardSize.cgRectValue.height
+    func save(){
+        let _ = Meme(topTextMeme: topText.text!, buttomTextMeme: buttomText.text!, originalImage: imageView.image!, memedImage: generateMemedImage())
     }
     
 }
