@@ -22,7 +22,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
     let memeTextAtribute: [NSAttributedString.Key: Any] = [
         NSAttributedString.Key.strokeColor: UIColor.black,
         NSAttributedString.Key.foregroundColor : UIColor.white,
-        NSAttributedString.Key.strokeWidth : 2.0,
+        NSAttributedString.Key.strokeWidth : -2.0,
         NSAttributedString.Key.font : UIFont(name: "HelveticaNeue-CondensedBlack", size: 28) as Any
     ]
     
