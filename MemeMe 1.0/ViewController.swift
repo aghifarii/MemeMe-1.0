@@ -17,7 +17,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var toolBar: UIToolbar!
     
-    var textDelegate = MyTextFieldDelegate()
+    let textDelegate = MyTextFieldDelegate()
     
     let memeTextAtribute: [NSAttributedString.Key: Any] = [
         NSAttributedString.Key.strokeColor: UIColor.black,
@@ -31,7 +31,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
         topText.defaultTextAttributes = memeTextAtribute
         bottomText.defaultTextAttributes = memeTextAtribute
         imageView.sizeToFit()
-        
         self.topText.delegate = textDelegate
         self.bottomText.delegate = textDelegate
     }
@@ -69,6 +68,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
         topText.text = "TOP"
         bottomText.text = "BOTTOM"
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         super .viewWillDisappear(animated)
     }
@@ -89,14 +89,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
     }
     
     func subscribeToKeyboardNotifications() {
-
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
     }
 
     func unsubscribeFromKeyboardNotifications() {
-
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
@@ -112,7 +109,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
     }
 
     func getKeyboardHeight(_ notification:Notification) -> CGFloat {
-
         let userInfo = notification.userInfo
         let keyboardSize = userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue // of CGRect
         return keyboardSize.cgRectValue.height
@@ -134,7 +130,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
         view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
         let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
-
         //Show tollbar and navbar
         navigationBar.isHidden = false
         toolBar.isHidden = false
