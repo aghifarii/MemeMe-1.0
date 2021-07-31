@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8426C07F26B5811C00BCF98E /* Meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8426C07E26B5811C00BCF98E /* Meme.swift */; };
 		847BCF2926B4596E009D5962 /* MyTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847BCF2826B4596E009D5962 /* MyTextFieldDelegate.swift */; };
 		8489CBA526A9742C00897E52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8489CBA426A9742C00897E52 /* AppDelegate.swift */; };
 		8489CBA726A9742C00897E52 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8489CBA626A9742C00897E52 /* SceneDelegate.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8426C07E26B5811C00BCF98E /* Meme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meme.swift; sourceTree = "<group>"; };
 		847BCF2826B4596E009D5962 /* MyTextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTextFieldDelegate.swift; sourceTree = "<group>"; };
 		8489CBA126A9742C00897E52 /* MemeMe 1.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MemeMe 1.0.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8489CBA426A9742C00897E52 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 				8489CBA426A9742C00897E52 /* AppDelegate.swift */,
 				8489CBA626A9742C00897E52 /* SceneDelegate.swift */,
 				8489CBA826A9742C00897E52 /* ViewController.swift */,
+				8426C07E26B5811C00BCF98E /* Meme.swift */,
 				847BCF2826B4596E009D5962 /* MyTextFieldDelegate.swift */,
 				8489CBAA26A9742C00897E52 /* Main.storyboard */,
 				8489CBAD26A9742C00897E52 /* Assets.xcassets */,
@@ -144,6 +147,7 @@
 				8489CBA526A9742C00897E52 /* AppDelegate.swift in Sources */,
 				847BCF2926B4596E009D5962 /* MyTextFieldDelegate.swift in Sources */,
 				8489CBA726A9742C00897E52 /* SceneDelegate.swift in Sources */,
+				8426C07F26B5811C00BCF98E /* Meme.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
