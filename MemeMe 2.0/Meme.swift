@@ -1,6 +1,6 @@
 //
 //  Meme.swift
-//  MemeMe 1.0
+//  MemeMe 2.0
 //
 //  Created by Alhamdani Ghifari on 31/07/21.
 //
