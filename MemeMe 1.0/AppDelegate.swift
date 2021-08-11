@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  MemeMe 2.0
+//  MemeMe 1.0
 //
 //  Created by Alhamdani Ghifari on 22/07/21.
 //
